@@ -21,8 +21,7 @@
     "net.funkysheep.unity.osm": "0.1.0",
     "net.funkysheep.unity.tiles": "0.1.0",
     "net.funkysheep.unity.vectors": "0.1.0",
-    "net.funkysheep.unity.network": "0.1.7",
-    "com.unity.probuilder": "5.0.4"
+    "net.funkysheep.unity.network": "0.1.7"
   },
   "scopedRegistries": [
     {
