@@ -1,0 +1,23 @@
+{
+    "name": "FunkySheep.Earth",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c242ce1ceb051254a9502732b4939706",
+        "GUID:8dab0731d65dec94890ae1efe17f6f85",
+        "GUID:b1211e128b1ebc149ada3347f2d73d5b",
+        "GUID:1826c0224c0d048b88112c79bbb0cd85",
+        "GUID:56e6c9dad623c7042acaeece086f4754",
+        "GUID:74023f8c3d4cc0d4a894ac9ca0df260b",
+        "GUID:9523c4d4c693b4b4696497f3680118c7",
+        "GUID:4173ac327791fcb42bdc7c10ce898bfb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
