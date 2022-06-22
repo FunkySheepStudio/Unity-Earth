@@ -1,3 +1,7 @@
+## Version 0.1.2 (June 22, 2022)
+- **Bug Fixes**
+  - Remove Editor from build
+
 ## Version 0.1.1 (June 21, 2022)
 - **Features**
   - Add Editor tile spawning button

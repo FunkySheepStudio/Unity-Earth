@@ -1,3 +1,5 @@
+#if (UNITY_EDITOR) 
+
 using UnityEngine;
 using UnityEditor;
 
@@ -23,3 +25,4 @@ namespace FunkySheep.Earth
     }
 
 }
+#endif
