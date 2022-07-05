@@ -1,3 +1,7 @@
+## Version 0.1.3 (July 05, 2022)
+- **Bug Fixes**
+  - Remove 2 points buildings from clockwise detection
+
 ## Version 0.1.2 (June 22, 2022)
 - **Bug Fixes**
   - Remove Editor from build

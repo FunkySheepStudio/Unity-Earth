@@ -71,6 +71,11 @@ namespace FunkySheep.Earth.Buildings
         /// <returns></returns>
         public void SetClockWise()
         {
+            if (points.Count <= 2)
+            {
+                return;
+            }
+
             int result = FunkySheep.Vectors.Utils.IsClockWise(points[1], points[points.Count - 1], points[0]);
             if (result < 0)
             {
