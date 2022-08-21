@@ -15,6 +15,8 @@ namespace FunkySheep.Earth.Buildings
         public Material floorMaterial;
         public FunkySheep.Events.GameObjectEvent onBuildingCreation;
 
+        public GameObject buildingPrefab;
+
         public void DownLoad(Vector2Int position)
         {
             double[] gpsBoundaries = FunkySheep.Earth.Map.Utils.CaclulateGpsBoundaries(earthManager.zoomLevel.value, position);
@@ -28,7 +30,7 @@ namespace FunkySheep.Earth.Buildings
 
         private void Update()
         {
-            Create();
+            Create(50);
         }
 
         public void ExtractOsmData(byte[] osmFile)
@@ -83,9 +85,9 @@ namespace FunkySheep.Earth.Buildings
             return urlTemplate.Interpolate(parameters, parametersNames);
         }
 
-        public void Create()
+        public void Create(int nbPerFrame)
         {
-            for (int i = 0; i < buildings.Count; i++)
+            for (int i = 0; i < nbPerFrame && i < buildings.Count; i++)
             {
                 Building building;
                 if (buildings.TryDequeue(out building))
@@ -98,7 +100,16 @@ namespace FunkySheep.Earth.Buildings
                       building.position.y
                     );
 
-                    GameObject go = new GameObject(building.id.ToString());
+                    GameObject go;
+
+                    if (buildingPrefab)
+                    {
+                        go = GameObject.Instantiate(buildingPrefab);
+                        go.name = building.id.ToString();
+                    } else {
+                        go = new GameObject(building.id.ToString());
+                    }
+                     
                     go.tag = "Floor";
                     go.transform.position = buildingPosition;
                     go.transform.parent = transform;

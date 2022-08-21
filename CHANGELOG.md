@@ -1,3 +1,8 @@
+## Version 0.1.4 (August 21, 2022)
+- **Features**
+  - Add building prefab
+  - Add trees and buildings 50 max count on update
+
 ## Version 0.1.3 (July 05, 2022)
 - **Bug Fixes**
   - Remove 2 points buildings from clockwise detection

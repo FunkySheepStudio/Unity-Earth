@@ -32,7 +32,7 @@ namespace FunkySheep.Earth.Trees
 
         private void Update()
         {
-            Create();
+            Create(50);
         }
 
         public void AddedOSMTile(Map.Tile OSMtile)
@@ -131,9 +131,9 @@ namespace FunkySheep.Earth.Trees
             go.transform.parent = transform;
         }
 
-        public void Create()
+        public void Create(int frameCount)
         {
-            for (int i = 0; i < trees.Count; i++)
+            for (int i = 0; i < frameCount && i < trees.Count; i++)
             {
                 Vector3 tree;
                 if (trees.TryDequeue(out tree))
