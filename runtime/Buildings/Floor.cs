@@ -51,6 +51,19 @@ namespace FunkySheep.Earth.Buildings
             }
 
             mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 15f, false);
+
+            foreach (var face in mesh.faces)
+            {
+                face.uv = new AutoUnwrapSettings()
+                {
+                    anchor = AutoUnwrapSettings.Anchor.LowerLeft,
+                    scale = new Vector3(1f, 1f, 1f),
+                    fill = AutoUnwrapSettings.Fill.Fit
+                };
+            }
+
+            mesh.Refresh(RefreshMask.UV);
+
             GetComponent<MeshRenderer>().material = material;
             transform.position = new Vector3(building.position.x, building.lowPoint.Value, building.position.y);
 

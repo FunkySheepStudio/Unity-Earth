@@ -1,3 +1,7 @@
+## Version 0.1.4 (August 28, 2022)
+- **Features**
+  - Add building UV unwrap
+
 ## Version 0.1.4 (August 21, 2022)
 - **Features**
   - Add building prefab
