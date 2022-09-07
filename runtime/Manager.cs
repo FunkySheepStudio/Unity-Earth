@@ -57,10 +57,10 @@ namespace FunkySheep.Earth
 
             Vector2Int insideTileQuarterPosition = tilesManager.InsideTileQuarterPosition(Vector2.zero);
 
-            AddTile(tilePosition);
+            /*AddTile(tilePosition);
             AddTile(tilePosition + insideTileQuarterPosition.y * Vector2Int.up);
             AddTile(tilePosition + insideTileQuarterPosition.x * Vector2Int.right);
-            AddTile(tilePosition + insideTileQuarterPosition);
+            AddTile(tilePosition + insideTileQuarterPosition);*/
         }
 
         public Vector2 CalculatePosition(double latitude, double longitude)

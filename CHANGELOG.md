@@ -1,3 +1,7 @@
+## Version 0.1.6 (September 07, 2022)
+- **Features**
+  - Remove tiles auto spawning
+
 ## Version 0.1.4 (August 28, 2022)
 - **Features**
   - Add building UV unwrap
