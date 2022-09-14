@@ -1,3 +1,7 @@
+## Version 0.1.7 (September 17, 2022)
+- **Features**
+  - Added tile and tile inside positions calculation
+
 ## Version 0.1.6 (September 07, 2022)
 - **Features**
   - Remove tiles auto spawning

@@ -57,10 +57,8 @@ namespace FunkySheep.Earth
 
             Vector2Int insideTileQuarterPosition = tilesManager.InsideTileQuarterPosition(Vector2.zero);
 
-            /*AddTile(tilePosition);
-            AddTile(tilePosition + insideTileQuarterPosition.y * Vector2Int.up);
-            AddTile(tilePosition + insideTileQuarterPosition.x * Vector2Int.right);
-            AddTile(tilePosition + insideTileQuarterPosition);*/
+            if (onStarted)
+                onStarted.Raise();
         }
 
         public Vector2 CalculatePosition(double latitude, double longitude)
@@ -76,6 +74,36 @@ namespace FunkySheep.Earth
             position *= tilesManager.tileSize.value;
 
             return position;
+        }
+
+        /// <summary>
+        /// Calculate the current world tile given a world position
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public Vector2Int CalculateTilePosition(Vector3 position)
+        {
+            return FunkySheep.Tiles.Utils.TilePosition(
+              new Vector2(
+                position.x,
+                position.z
+              ),
+              tilesManager.tileSize.value,
+              tilesManager.initialOffset.value
+            );
+        }
+
+        /// Calculate the current inside quarter tile position given a world position
+        public Vector2Int CalculateInsideTilePosition(Vector3 position)
+        {
+            return FunkySheep.Tiles.Utils.InsideTileQuarterPosition(
+              new Vector2(
+                transform.position.x,
+                transform.position.z
+              ),
+              tilesManager.tileSize.value,
+              tilesManager.initialOffset.value
+            );
         }
     }
 }
