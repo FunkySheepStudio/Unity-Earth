@@ -1,3 +1,7 @@
+## Version 0.1.8 (September 19, 2022)
+- **Features**
+  - Remove auto start
+
 ## Version 0.1.7 (September 17, 2022)
 - **Features**
   - Added tile and tile inside positions calculation

@@ -20,11 +20,6 @@ namespace FunkySheep.Earth
             tilesManager = GetComponent<FunkySheep.Tiles.Manager>();
         }
 
-        private void Start()
-        {
-            Reset();
-        }
-
         public void AddTile(Vector2Int gridPosition)
         {
             if (!tilesManager.Exist(gridPosition))
@@ -41,7 +36,7 @@ namespace FunkySheep.Earth
             }
         }
 
-        public void Reset()
+        public void Init()
         {
             initialMercatorPosition.value = Utils.toCartesianVector2(initialLongitude.value, initialLatitude.value);
             tilesManager.tileSize.value = (float)Map.Utils.TileSize(zoomLevel.value, initialLatitude.value);
