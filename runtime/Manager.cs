@@ -100,5 +100,18 @@ namespace FunkySheep.Earth
               tilesManager.initialOffset.value
             );
         }
+
+        /// Calculate GPS coordinates of a world position
+        public (double latitude, double longitude) CalculateGPSCoordinates (Vector3 position)
+        {
+            var calculatedGPS = FunkySheep.Earth.Utils.toGeoCoord(
+                    new Vector2(
+                        initialMercatorPosition.value.x + position.x / Mathf.Cos(Mathf.Deg2Rad * (float)initialLatitude.value),
+                        initialMercatorPosition.value.y + position.z / Mathf.Cos(Mathf.Deg2Rad * (float)initialLatitude.value)
+                        )
+                );
+            
+            return calculatedGPS;
+        }
     }
 }
