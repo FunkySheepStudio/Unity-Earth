@@ -12,6 +12,7 @@ namespace FunkySheep.Earth.Buildings
         public Building building;
         public Material material;
         ProBuilderMesh mesh;
+        public Vector3[] newPositions;
         private void Awake()
         {
             mesh = this.GetComponent<ProBuilderMesh>();
@@ -42,7 +43,7 @@ namespace FunkySheep.Earth.Buildings
             }
 
             // Create the shape
-            Vector3[] newPositions = new Vector3[building.points.Count];
+            newPositions = new Vector3[building.points.Count];
             for (int i = 0; i < newPositions.Length; i++)
             {
                 newPositions[i].x = building.points[i].x - building.position.x;
@@ -50,7 +51,7 @@ namespace FunkySheep.Earth.Buildings
                 newPositions[i].z = building.points[i].y - building.position.y;
             }
 
-            mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 15f, false);
+            mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 0.2f, false);
 
             foreach (var face in mesh.faces)
             {

@@ -1,9 +1,12 @@
 using UnityEngine;
 namespace FunkySheep.Earth.Terrain
 {
+    [AddComponentMenu("FunkySheep/Earth/Earth Terrain Manager")]
     public class Manager : MonoBehaviour
     {
-        public FunkySheep.Earth.Manager earth;
+        //public FunkySheep.Earth.Manager earth;
+        public FunkySheep.Types.Float tileSize;
+        public FunkySheep.Types.Vector2 initialOffset;
         public FunkySheep.Earth.Terrain.AddedTileEvent addedTileEvent;
         public Material material;
 
@@ -11,9 +14,9 @@ namespace FunkySheep.Earth.Terrain
         {
             GameObject terrainTileGo = new GameObject();
             terrainTileGo.transform.position = new Vector3(
-                earth.tilesManager.tileSize.value * mapTile.tilemapPosition.x + earth.tilesManager.WorldOffset().x,
+                tileSize.value * mapTile.tilemapPosition.x + FunkySheep.Tiles.Utils.WorldOffset(tileSize.value, initialOffset.value).x,
                 0,
-                earth.tilesManager.tileSize.value * mapTile.tilemapPosition.y + earth.tilesManager.WorldOffset().y
+                tileSize.value * mapTile.tilemapPosition.y + FunkySheep.Tiles.Utils.WorldOffset(tileSize.value, initialOffset.value).y
             );
             terrainTileGo.transform.parent = transform;
             terrainTileGo.name = mapTile.tilemapPosition.ToString();
@@ -28,9 +31,9 @@ namespace FunkySheep.Earth.Terrain
             terrain.terrainData.heightmapResolution = mapTile.data.sprite.texture.width / 2;
             // Set the tile size
             terrain.terrainData.size = new Vector3(
-                earth.tilesManager.tileSize.value,
+                tileSize.value,
                 8900,
-                earth.tilesManager.tileSize.value
+                tileSize.value
             );
 
             terrain.allowAutoConnect = true;

@@ -9,7 +9,11 @@ namespace FunkySheep.Earth.Map
     [RequireComponent(typeof(Grid))]
     public class Manager : MonoBehaviour
     {
-        public Earth.Manager earth;
+        public FunkySheep.Types.Int32 zoomLevel;
+        public FunkySheep.Types.Float tileSize;
+        public FunkySheep.Types.Vector2 initialOffset;
+        public FunkySheep.Types.Vector2 initialMapPosition;
+
         public FunkySheep.Types.String url;
         public FunkySheep.Types.Vector2Int textureResolution;
         public AddedTileEvent addedTileEvent;
@@ -32,13 +36,13 @@ namespace FunkySheep.Earth.Map
         void Reset()
         {
             tilemap.transform.localScale = new Vector3(
-                earth.tilesManager.tileSize.value / textureResolution.value.x,
-                earth.tilesManager.tileSize.value / textureResolution.value.y,
+                tileSize.value / textureResolution.value.x,
+                tileSize.value / textureResolution.value.y,
             1f);
 
             tilemap.tileAnchor = new Vector3(
-                earth.tilesManager.initialOffset.value.x,
-                earth.tilesManager.initialOffset.value.y,
+                initialOffset.value.x,
+                initialOffset.value.y,
                 0
             );
         }
@@ -56,7 +60,7 @@ namespace FunkySheep.Earth.Map
             }
 
             // Reverse mercator and grid positions
-            Vector2Int gridPosition = (mapPosition - new Vector2Int(Mathf.FloorToInt(earth.initialMapPosition.value.x), Mathf.FloorToInt(earth.initialMapPosition.value.y))) * new Vector2Int(1, -1);
+            Vector2Int gridPosition = (mapPosition - new Vector2Int(Mathf.FloorToInt(initialMapPosition.value.x), Mathf.FloorToInt(initialMapPosition.value.y))) * new Vector2Int(1, -1);
             Vector3Int tileMapPosition = new Vector3Int(gridPosition.x, gridPosition.y, 0);
 
             if (!tilemap.HasTile(tileMapPosition))
@@ -112,7 +116,7 @@ namespace FunkySheep.Earth.Map
             string[] parameters = new string[3];
             string[] parametersNames = new string[3];
 
-            parameters[0] = earth.zoomLevel.value.ToString();
+            parameters[0] = zoomLevel.value.ToString();
             parametersNames[0] = "zoom";
 
             parameters[1] = mapPosition.x.ToString();

@@ -12,12 +12,19 @@ namespace FunkySheep.Earth
         public FunkySheep.Types.Vector2 initialMapPosition;
         public FunkySheep.Types.Vector2 initialMercatorPosition;
         public FunkySheep.Events.SimpleEvent onStarted;
-        public FunkySheep.Events.Vector2IntEvent onMapPositionChanged;
+        public FunkySheep.Events.Vector2IntEvent onAddedTile;
         public FunkySheep.Tiles.Manager tilesManager;
+        public bool AutoInit = false;
 
         private void Awake()
         {
             tilesManager = GetComponent<FunkySheep.Tiles.Manager>();
+        }
+
+        private void Start()
+        {
+            if (AutoInit)
+                Init();
         }
 
         public void AddTile(Vector2Int gridPosition)
@@ -32,7 +39,7 @@ namespace FunkySheep.Earth
                   Mathf.FloorToInt(initialMapPosition.value.y) - gridPosition.y
                 );
 
-                onMapPositionChanged.Raise(calculatedMapPosition);
+                onAddedTile.Raise(calculatedMapPosition);
             }
         }
 

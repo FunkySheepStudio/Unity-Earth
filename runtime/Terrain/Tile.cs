@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace FunkySheep.Earth.Terrain
 {
-    [AddComponentMenu("FunkySheep/Earth/Earth Terrain Manager")]
     [RequireComponent(typeof(UnityEngine.Terrain))]
     [RequireComponent(typeof(UnityEngine.TerrainCollider))]
     public class Tile : MonoBehaviour

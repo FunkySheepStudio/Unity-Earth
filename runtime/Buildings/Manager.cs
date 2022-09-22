@@ -30,7 +30,10 @@ namespace FunkySheep.Earth.Buildings
 
         private void Update()
         {
-            Create(50);
+            while (buildings.Count != 0)
+            {
+                Create();
+            }
         }
 
         public void ExtractOsmData(byte[] osmFile)
@@ -85,42 +88,71 @@ namespace FunkySheep.Earth.Buildings
             return urlTemplate.Interpolate(parameters, parametersNames);
         }
 
-        public void Create(int nbPerFrame)
+        public void Create()
         {
-            for (int i = 0; i < nbPerFrame && i < buildings.Count; i++)
+            Building building;
+            if (buildings.TryDequeue(out building))
             {
-                Building building;
-                if (buildings.TryDequeue(out building))
+                building.onBuildingCreation = onBuildingCreation;
+
+                Vector3 buildingPosition = new Vector3(
+                  building.position.x,
+                  0,
+                  building.position.y
+                );
+
+                GameObject go;
+
+                if (buildingPrefab)
                 {
-                    building.onBuildingCreation = onBuildingCreation;
-
-                    Vector3 buildingPosition = new Vector3(
-                      building.position.x,
-                      0,
-                      building.position.y
-                    );
-
-                    GameObject go;
-
-                    if (buildingPrefab)
-                    {
-                        go = GameObject.Instantiate(buildingPrefab);
-                        go.name = building.id.ToString();
-                    } else {
-                        go = new GameObject(building.id.ToString());
-                    }
-                     
-                    go.tag = "Floor";
-                    go.transform.position = buildingPosition;
-                    go.transform.parent = transform;
-                    FunkySheep.Earth.Buildings.Floor floor = go.AddComponent<FunkySheep.Earth.Buildings.Floor>();
-                    FunkySheep.Earth.Components.SetHeight setHeight = go.AddComponent<FunkySheep.Earth.Components.SetHeight>();
-                    floor.building = building;
-                    floor.material = floorMaterial;
-
-                    setHeight.action = floor.Create;
+                    go = GameObject.Instantiate(buildingPrefab);
+                    go.name = building.id.ToString();
                 }
+                else
+                {
+                    go = new GameObject(building.id.ToString());
+                }
+
+                go.isStatic = true;
+
+                go.tag = "Floor";
+                go.transform.position = buildingPosition;
+                go.transform.parent = transform;
+                FunkySheep.Earth.Buildings.Floor floor = go.AddComponent<FunkySheep.Earth.Buildings.Floor>();
+                FunkySheep.Earth.Components.SetHeight setHeight = go.AddComponent<FunkySheep.Earth.Components.SetHeight>();
+                floor.building = building;
+                floor.material = floorMaterial;
+
+                setHeight.action = floor.Create;
+
+                //StaticBatchingUtility.Combine(go);
             }
+        }
+
+        public void AddBuilding(GameObject go)
+        {
+            FunkySheep.Earth.Buildings.Floor floor = go.GetComponent<FunkySheep.Earth.Buildings.Floor>();
+            GameObject newGo = new GameObject("building");
+            newGo.transform.parent = go.transform;
+            newGo.transform.localPosition = Vector3.up * (floor.building.hightPoint.Value - floor.building.lowPoint.Value + 0.2f);
+
+            ProceduralToolkit.Samples.Buildings.PolygonAsset floorPlolygone = ScriptableObject.CreateInstance<ProceduralToolkit.Samples.Buildings.PolygonAsset>();
+            foreach (Vector3 item in floor.newPositions)
+            {
+                floorPlolygone.vertices.Add(new Vector2(item.x, item.z));
+            }
+
+            ProceduralToolkit.Samples.Buildings.BuildingGeneratorComponent buildingGenerator = GetComponent<ProceduralToolkit.Samples.Buildings.BuildingGeneratorComponent>();
+            if (floor.newPositions.Length <= 6)
+            {
+                buildingGenerator.config.roofConfig.type = ProceduralToolkit.Buildings.RoofType.Hipped;
+            } else
+            {
+                buildingGenerator.config.roofConfig.type = ProceduralToolkit.Buildings.RoofType.Flat;
+            }
+
+            buildingGenerator.foundationPolygon = floorPlolygone;
+            buildingGenerator.Generate(newGo.transform);
         }
     }
 }

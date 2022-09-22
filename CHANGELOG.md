@@ -1,5 +1,9 @@
 ## Version 0.1.9 (September 21, 2022)
 - **Features**
+  - Add Unity-Buildings Library
+
+## Version 0.1.9 (September 21, 2022)
+- **Features**
   - Add GPS coordinates calculation
 
 ## Version 0.1.8 (September 19, 2022)
