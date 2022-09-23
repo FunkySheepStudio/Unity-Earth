@@ -1,3 +1,9 @@
+## Version 0.2.1 (September 23, 2022)
+- **Features**
+  - On demand building spawning
+
+## Version 0.1.9 (September 21, 2022)
+
 ## Version 0.1.9 (September 21, 2022)
 - **Features**
   - Add Unity-Buildings Library
