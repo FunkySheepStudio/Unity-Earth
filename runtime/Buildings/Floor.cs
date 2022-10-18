@@ -5,21 +5,16 @@ using UnityEngine.ProBuilder.MeshOperations;
 
 namespace FunkySheep.Earth.Buildings
 {
-    [RequireComponent(typeof(ProBuilderMesh))]
-    [RequireComponent(typeof(MeshCollider))]
     public class Floor : MonoBehaviour
     {
         public Building building;
         public Material material;
         ProBuilderMesh mesh;
         public Vector3[] newPositions;
-        private void Awake()
-        {
-            mesh = this.GetComponent<ProBuilderMesh>();
-        }
 
         public void Create()
         {
+           
             // Get the min and max heights
             foreach (Vector2 point in building.points)
             {
@@ -41,6 +36,10 @@ namespace FunkySheep.Earth.Buildings
                     building.hightPoint = height.Value;
                 }
             }
+
+            gameObject.AddComponent<ProBuilderMesh>();
+            gameObject.AddComponent<MeshCollider>();
+            mesh = this.GetComponent<ProBuilderMesh>();
 
             // Create the shape
             newPositions = new Vector3[building.points.Count];
